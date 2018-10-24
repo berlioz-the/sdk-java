@@ -63,6 +63,7 @@ public class Client {
     private final ClientEndpointConfig _cec = ClientEndpointConfig.Builder.create().build();
     private ClientManager _wsClientManager = ClientManager.createClient();
     private AgentEndpoint _endpoint = new AgentEndpoint(this);
+    private Session _currentSession;
 
     public Client()
     {
@@ -108,7 +109,11 @@ public class Client {
     {
         logger.info("Connecting to: {}.", System.getenv("BERLIOZ_AGENT_PATH"));
 
-        this._wsClientManager.connectToServer(
+        if (this._currentSession != null) {
+            this._currentSession.close();
+        }
+
+        this._currentSession = this._wsClientManager.connectToServer(
                 this._endpoint,
                 this._cec,
                 new URI(System.getenv("BERLIOZ_AGENT_PATH")));
