@@ -2,6 +2,8 @@ package sample;
 
 import com.berlioz.Berlioz;
 
+import java.util.Scanner;
+
 public class SampleApplication
 {
     public static void main(String args[])
@@ -12,5 +14,6 @@ public class SampleApplication
 
         Berlioz.service("web").all();
 
+        new Scanner(System.in).nextLine(); // Don't close immediately.
     }
 }
