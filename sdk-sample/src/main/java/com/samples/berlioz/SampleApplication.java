@@ -1,4 +1,4 @@
-package sample;
+package com.samples.berlioz;
 
 import com.berlioz.Berlioz;
 

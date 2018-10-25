@@ -5,13 +5,13 @@ import org.glassfish.tyrus.client.ClientManager;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.websocket.DeploymentException;
 import javax.websocket.*;
 
 // https://www.baeldung.com/websockets-api-java-spring-client
