@@ -2,13 +2,11 @@ package com.berlioz;
 
 
 import com.berlioz.agent.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Berlioz {
-
-    public static void DoSomething() {
-        System.out.println("BERLIOZ:: DO SOMETHING");
-
-    }
+    private static Logger logger = LogManager.getLogger(Berlioz.class);
 
     public static Sector sector(String name) {
         return new Sector(name);
@@ -24,7 +22,7 @@ public class Berlioz {
     }
 
     public static void run() {
-        System.out.println("BERLIOZ:: RUN");
+        logger.info("Run...");
         Client client = new Client();
         client.run();
     }

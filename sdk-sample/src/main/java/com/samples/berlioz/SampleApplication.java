@@ -4,11 +4,17 @@ import com.berlioz.Berlioz;
 
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class SampleApplication
 {
+    private static Logger logger = LogManager.getLogger(SampleApplication.class);
+
     public static void main(String args[])
     {
-        System.out.println("Hello World!!");
+        logger.info("Hello World!!");
 
         Berlioz.run();
 

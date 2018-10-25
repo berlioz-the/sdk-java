@@ -18,6 +18,8 @@ import javax.websocket.*;
 
 public class Client {
 
+    private static Logger logger = LogManager.getLogger(Client.class);
+
     class RetryTimerTask extends TimerTask {
         Client _owner;
 
@@ -55,8 +57,6 @@ public class Client {
             this._owner._schedule();
         }
     }
-
-    private Logger logger = LogManager.getLogger(Client.class);
 
     private boolean _isScheduled = false;
 

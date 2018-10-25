@@ -1,6 +1,12 @@
 package com.berlioz;
 
+import com.berlioz.agent.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Service {
+    private static Logger logger = LogManager.getLogger(Service.class);
+
     String _id;
     String _endpoint;
 
@@ -17,6 +23,6 @@ public class Service {
     }
 
     public void all() {
-        System.out.printf("Service %s :: ALL", this._id);
+        logger.info("Service {} :: ALL", this._id);
     }
 }
