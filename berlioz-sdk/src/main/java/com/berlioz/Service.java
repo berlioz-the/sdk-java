@@ -1,10 +1,13 @@
 package com.berlioz;
 
 import com.berlioz.agent.Client;
+import com.berlioz.comm.BaseEndpoint;
 import com.berlioz.comm.Endpoint;
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Service {
@@ -12,6 +15,7 @@ public class Service {
 
     String _id;
     String _endpoint;
+    PeerAccessor _peerAccessor;
 
     Service(String id)
     {
@@ -22,30 +26,57 @@ public class Service {
     {
         this(id);
         this._endpoint = endpoint;
+        this._peerAccessor = new PeerAccessor(ListHelper.Path(this._id, this._endpoint));
     }
 
-    public void monitorAll(Registry.Callback<Map<String, Endpoint>> cb)
+    public void monitorAll(final Registry.Callback<Map<String, Endpoint>> cb)
     {
-
+        this._peerAccessor.monitorAll(new Registry.Callback<Map<String, BaseEndpoint>>() {
+            public void callback(Map<String, BaseEndpoint> map) {
+                Map<String, Endpoint> newMap = castPeers(map);
+                cb.callback(newMap);
+            }
+        });
     }
 
-    public void monitorFirst(Registry.Callback<Endpoint> cb)
+    public void monitorFirst(final Registry.Callback<Endpoint> cb)
     {
-
+        this._peerAccessor.monitorFirst(new Registry.Callback<BaseEndpoint>() {
+            public void callback(BaseEndpoint ep) {
+                cb.callback(castPeer(ep));
+            }
+        });
     }
 
     public Map<String, Endpoint> all()
     {
-        return null;
+        Map<String, BaseEndpoint> map = this._peerAccessor.all();
+        return castPeers(map);
     }
 
     public Endpoint first()
     {
-        return null;
+        BaseEndpoint ep = this._peerAccessor.first();
+        return castPeer(ep);
     }
 
     public Endpoint random()
     {
-        return null;
+        BaseEndpoint ep = this._peerAccessor.random();
+        return castPeer(ep);
+    }
+
+    private Map<String, Endpoint> castPeers(Map<String, BaseEndpoint> map)
+    {
+        Map<String, Endpoint> newMap = new HashMap<String, Endpoint>();
+        for(Map.Entry<String, BaseEndpoint> entry : map.entrySet()) {
+            newMap.put(entry.getKey(), castPeer(entry.getValue()));
+        }
+        return newMap;
+    }
+
+    private Endpoint castPeer(BaseEndpoint peer)
+    {
+        return (Endpoint)peer;
     }
 }

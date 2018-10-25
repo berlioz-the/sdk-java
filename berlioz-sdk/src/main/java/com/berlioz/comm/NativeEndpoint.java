@@ -2,9 +2,7 @@ package com.berlioz.comm;
 
 import com.google.gson.annotations.SerializedName;
 
-public class NativeEndpoint {
-    private String name;
-
+public class NativeEndpoint extends BaseEndpoint {
     @SerializedName("class")
     private String className;
     private String subClass;

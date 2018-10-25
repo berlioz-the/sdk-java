@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Berlioz {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
-    private static Registry registry = new Registry();
+    static Registry registry = new Registry();
     private static Processor processor = new Processor(registry);
 
     public static Sector sector(String name) {
@@ -17,7 +17,7 @@ public class Berlioz {
 
 
     public static Service service(String name) {
-        return service(name, null);
+        return service(name, "default");
     }
 
     public static Service service(String name, String endpoint) {
@@ -28,11 +28,5 @@ public class Berlioz {
         logger.info("Run...");
         Client client = new Client(processor);
         client.run();
-        
-        registry.subscribe("policies", ListHelper.Path(), new Registry.Callback<Policy>() {
-            public void callback(Policy value) {
-                logger.info("POLICIES CHANGED. VALUE: {}", value);
-            }
-        });
     }
 }

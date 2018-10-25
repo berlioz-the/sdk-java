@@ -22,7 +22,9 @@
 
     </Appenders>
     <Loggers>
-        <Logger name="com.berlioz.agent.Client" level="TRACE" />
+        <Logger name="com.berlioz.agent.Client" level="DEBUG" />
+        <Logger name="com.berlioz.Processor" level="DEBUG" />
+        <Logger name="com.berlioz.Registry" level="DEBUG" />
         <Root level="DEBUG" additivity="false">
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingFile" />

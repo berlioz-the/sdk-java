@@ -27,7 +27,7 @@ public class Registry {
     public < T > void set(String sectionName, List<String> path, T value)
     {
         String pathStr = this._getPath(path);
-        logger.info("SET {} :: {} => {}", sectionName, pathStr, value);
+        logger.debug("SET {} :: {} => {}", sectionName, pathStr, value);
         Map<String, Object> section = this._getSection(sectionName);
         section.put(pathStr, value);
 
@@ -36,14 +36,14 @@ public class Registry {
 
     public void reset(String sectionName, List<String> path)
     {
-        logger.info("RESET {} :: {}", sectionName, this._getPath(path));
+        logger.debug("RESET {} :: {}", sectionName, this._getPath(path));
         this._sections.put(sectionName, new HashMap<String, Object>());
     }
 
     public < T > T get(String sectionName, List<String> path)
     {
         String pathStr = this._getPath(path);
-//        logger.info("GET {} :: {} ...", sectionName, pathStr);
+//        logger.trace("GET {} :: {} ...", sectionName, pathStr);
         Map<String, Object> section = this._getSection(sectionName);
         if (!section.containsKey(pathStr))
         {
@@ -55,7 +55,7 @@ public class Registry {
 
     public < T > void subscribe(String sectionName, List<String> path, Callback<T> cb)
     {
-        logger.info("SUBSCRIBE {} :: {} ...", sectionName, this._getPath(path));
+        logger.debug("SUBSCRIBE {} :: {} ...", sectionName, this._getPath(path));
         String subscriberId = this._getSubscriberId(sectionName, path);
         if (!this._subscribers.containsKey(subscriberId)) {
             this._subscribers.put(subscriberId, new ArrayList<Object>());

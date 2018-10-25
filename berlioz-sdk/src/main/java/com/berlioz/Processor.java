@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Map;
 
 public class Processor {
-    private static Logger logger = LogManager.getLogger(Berlioz.class);
+    private static Logger logger = LogManager.getLogger(Processor.class);
     private Parser _parser = new Parser();
     private Registry _registry;
 
@@ -19,11 +19,10 @@ public class Processor {
 
     public void accept(String rawMessage)
     {
-        logger.info("Raw message: {}", rawMessage);
+        logger.trace("Raw message: {}", rawMessage);
         Message message = _parser.parse(rawMessage);
 
-        logger.info("Parsed message: {}", message);
-        logger.info("Parsed message to JSON: {}", _parser.toJson(message));
+//        logger.trace("Parsed message to JSON: {}", _parser.toJson(message));
 
         this._acceptPolicies(message);
         this._acceptEndpoints(message);
