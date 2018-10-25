@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Berlioz {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
+    private static Processor processor = new Processor();
 
     public static Sector sector(String name) {
         return new Sector(name);
@@ -23,7 +24,7 @@ public class Berlioz {
 
     public static void run() {
         logger.info("Run...");
-        Client client = new Client();
+        Client client = new Client(processor);
         client.run();
     }
 }

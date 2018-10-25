@@ -1,5 +1,6 @@
 package com.berlioz.agent;
 
+import com.berlioz.Processor;
 import org.glassfish.tyrus.client.ClientManager;
 
 import java.io.IOException;
@@ -47,6 +48,11 @@ public class Client {
                 @Override
                 public void onMessage(String message) {
                     logger.trace("Received message: {}", message);
+                    try {
+                        _owner._processor.accept(message);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             });
         }
@@ -64,10 +70,11 @@ public class Client {
     private ClientManager _wsClientManager = ClientManager.createClient();
     private AgentEndpoint _endpoint = new AgentEndpoint(this);
     private Session _currentSession;
+    private Processor _processor;
 
-    public Client()
+    public Client(Processor processor)
     {
-
+        _processor = processor;
     }
 
     public void run() {
