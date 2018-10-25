@@ -30,11 +30,11 @@ public class Parser {
             final JsonObject peersObject = json.getAsJsonObject();
             Set<Map.Entry<String, JsonElement>> entries = peersObject.entrySet();
             Peers peers = new Peers();
-            peers.peers = new HashMap<String, BasePeerData>();
+            peers.byService = new HashMap<String, BasePeerData>();
             for (Map.Entry<String, JsonElement> entry: entries) {
                 BasePeerData peerData = this.parseService(entry.getKey(), entry.getValue(), context);
                 if (peerData != null) {
-                    peers.peers.put(entry.getKey(), peerData);
+                    peers.byService.put(entry.getKey(), peerData);
                 }
             }
             return peers;
