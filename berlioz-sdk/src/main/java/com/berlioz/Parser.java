@@ -45,7 +45,7 @@ public class Parser {
             if (id.startsWith("service://") || id.startsWith("cluster://")) {
                 return this.parseEndpointService(json, context);
             } else {
-                return this.parseNativeService(json);
+                return this.parseNativeService(json, context);
             }
         }
 
@@ -85,9 +85,23 @@ public class Parser {
             return map;
         }
 
-        private BasePeerData parseNativeService(JsonElement json)
+        private NativeServicePeerData parseNativeService(JsonElement json, JsonDeserializationContext context)
         {
-            return new BasePeerData();
+            final JsonObject jsonObject = json.getAsJsonObject();
+
+            NativeServicePeerData serviceData = new NativeServicePeerData();
+            serviceData.peers = new HashMap<String, NativeEndpoint>();
+
+            Set<Map.Entry<String, JsonElement>> entries = jsonObject.entrySet();
+            for (Map.Entry<String, JsonElement> entry : entries)
+            {
+                NativeEndpoint endpointObj = context.deserialize(entry.getValue(), NativeEndpoint.class);
+                if (endpointObj != null) {
+                    serviceData.peers .put(entry.getKey(), endpointObj);
+                }
+            }
+
+            return serviceData;
         }
     }
 
