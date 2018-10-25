@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ceff8a6-c6de-4c87-bfcc-66e58f78e005" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../berlioz-sdk/berlioz-sdk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/berlioz-sdk.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../berlioz-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Berlioz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Berlioz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Processor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Peers.java" beforeDir="false" afterPath="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Peers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk-sample.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sdk-sample.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/../berlioz-sdk/target/" />
@@ -36,7 +29,7 @@
         <counts>
           <entry key="class" value="4" />
           <entry key="iml" value="4" />
-          <entry key="java" value="38" />
+          <entry key="java" value="40" />
           <entry key="xml" value="8" />
         </counts>
       </usages-collector>
@@ -44,19 +37,19 @@
         <counts>
           <entry key="CLASS" value="4" />
           <entry key="IDEA_MODULE" value="4" />
-          <entry key="JAVA" value="38" />
+          <entry key="JAVA" value="40" />
           <entry key="XML" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5016" />
+          <entry key="java" value="5326" />
           <entry key="xml" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5016" />
+          <entry key="JAVA" value="5326" />
           <entry key="XML" value="41" />
         </counts>
       </usages-collector>
@@ -83,12 +76,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Processor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            <state relative-caret-position="239">
+              <caret line="64" column="68" selection-start-line="64" selection-start-column="68" selection-end-line="64" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#355#356#0" expanded="true" />
                 <element signature="e#381#382#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#410#411#0" expanded="true" />
+                <element signature="e#491#492#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,7 +141,11 @@
       <find>parseEndpoints</find>
       <find>parseEndpoints(</find>
       <find>this.getPath</find>
+      <find>service://</find>
     </findStrings>
+    <dirStrings>
+      <dir>D:\Repos\berlioz-corp\sdk-java.git\berlioz-sdk\src\main\java\com\berlioz</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -155,7 +166,6 @@
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/ServicePeerData.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/NativeEndpoint.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/NativeServicePeerData.java" />
-        <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/NativeEndpointConfig.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Credentials.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/Message.java" />
@@ -164,6 +174,7 @@
         <option value="$PROJECT_DIR$/../berlioz-sdk/pom.xml" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Berlioz.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Registry.java" />
+        <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java" />
         <option value="$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Processor.java" />
       </list>
     </option>
@@ -323,7 +334,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540445550686" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540446829395" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../berlioz-sdk" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -350,7 +361,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SampleApplication (1)">
+  <component name="RunManager" selected="Application.SampleApplication">
     <configuration name="SampleApplication (1)" type="Application" factoryName="Application">
       <envs>
         <env name="BERLIOZ_AGENT_PATH" value="ws://localhost:40010/69ae298c-a25f-439f-aa07-a8cd252b6527" />
@@ -399,7 +410,7 @@
     <frame x="-7" y="-7" width="1721" height="935" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.262871" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.262871" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -426,34 +437,6 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26347667" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4762516" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32862645" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -600,13 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/ServicePeerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="51" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/NativeEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -670,16 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../berlioz-sdk/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -730,10 +696,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/comm/ServicePeerData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../berlioz-sdk/src/main/java/com/berlioz/Processor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        <state relative-caret-position="239">
+          <caret line="64" column="68" selection-start-line="64" selection-start-column="68" selection-end-line="64" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#355#356#0" expanded="true" />

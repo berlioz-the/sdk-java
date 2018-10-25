@@ -1,11 +1,11 @@
 package com.berlioz;
 
-import com.berlioz.comm.BasePeerData;
-import com.berlioz.comm.Endpoint;
-import com.berlioz.comm.Message;
+import com.berlioz.comm.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
 
 public class Processor {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
@@ -57,10 +57,27 @@ public class Processor {
         if (message.peers == null) {
             return;
         }
-        this._registry.set("byService", ListHelper.Path(), message.peers);
         for(String id: message.peers.byService.keySet()) {
             BasePeerData data = message.peers.byService.get(id);
-            this._registry.set("endpoints", ListHelper.Path(id), data);
+            if (this._parser.isEndpointService(id)) {
+                this._handleServicePeer(id, (ServicePeerData)data);
+            } else {
+                this._handleResourcePeer(id, (NativeServicePeerData)data);
+            }
         }
+    }
+
+    private void _handleServicePeer(String id, ServicePeerData data)
+    {
+        for(String endpoint: data.peers.keySet()) {
+            Map<String, Endpoint> endpointData = data.peers.get(endpoint);
+            this._registry.set("peers", ListHelper.Path(id, endpoint), endpointData);
+        }
+    }
+
+
+    private void _handleResourcePeer(String id, NativeServicePeerData resourceData)
+    {
+        this._registry.set("peers", ListHelper.Path(id), resourceData);
     }
 }

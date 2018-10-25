@@ -13,6 +13,11 @@ import java.util.Set;
 public class Parser {
     private static Logger logger = LogManager.getLogger(Parser.class);
 
+    public boolean isEndpointService(String id)
+    {
+        return id.startsWith("service://") || id.startsWith("cluster://");
+    }
+
     public Message parse(String rawMessage)
     {
         Message message = this.getGson().fromJson(rawMessage, Message.class);
@@ -42,7 +47,7 @@ public class Parser {
 
         private BasePeerData parseService(String id, JsonElement json, JsonDeserializationContext context)
         {
-            if (id.startsWith("service://") || id.startsWith("cluster://")) {
+            if (isEndpointService(id)) {
                 return this.parseEndpointService(json, context);
             } else {
                 return this.parseNativeService(json, context);
