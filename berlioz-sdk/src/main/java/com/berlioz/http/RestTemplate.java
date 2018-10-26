@@ -2,15 +2,13 @@ package com.berlioz.http;
 
 import com.berlioz.Executor;
 import com.berlioz.PeerAccessor;
-import com.berlioz.comm.Endpoint;
+import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.util.UriTemplate;
 
 import java.net.URI;
 import java.util.Map;

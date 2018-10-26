@@ -1,4 +1,4 @@
-package com.berlioz.comm;
+package com.berlioz.msg;
 
 import java.util.Map;
 

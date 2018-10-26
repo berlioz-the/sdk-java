@@ -1,6 +1,6 @@
 package com.berlioz;
 
-import com.berlioz.comm.*;
+import com.berlioz.msg.*;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

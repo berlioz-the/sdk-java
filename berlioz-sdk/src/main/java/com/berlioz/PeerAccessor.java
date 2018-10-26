@@ -1,6 +1,6 @@
 package com.berlioz;
 
-import com.berlioz.comm.BaseEndpoint;
+import com.berlioz.msg.BaseEndpoint;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

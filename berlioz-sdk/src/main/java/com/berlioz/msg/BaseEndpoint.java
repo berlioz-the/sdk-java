@@ -1,4 +1,4 @@
-package com.berlioz.comm;
+package com.berlioz.msg;
 
 public class BaseEndpoint {
     private String name;

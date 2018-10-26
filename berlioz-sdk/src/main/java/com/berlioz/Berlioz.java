@@ -2,19 +2,18 @@ package com.berlioz;
 
 
 import com.berlioz.agent.Client;
-import com.berlioz.comm.Policy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Berlioz {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
     static Registry registry = new Registry();
+    static PolicyResolver policy = new PolicyResolver(registry);
     private static Processor processor = new Processor(registry);
 
     public static Sector sector(String name) {
         return new Sector(name);
     }
-
 
     public static Service service(String name) {
         return service(name, "default");

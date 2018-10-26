@@ -1,10 +1,8 @@
 package com.berlioz;
 
-import com.berlioz.agent.Client;
-import com.berlioz.comm.BaseEndpoint;
-import com.berlioz.comm.Endpoint;
+import com.berlioz.msg.BaseEndpoint;
+import com.berlioz.msg.Endpoint;
 import com.berlioz.http.RestTemplate;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
