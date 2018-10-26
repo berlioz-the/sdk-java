@@ -2,11 +2,13 @@ package com.samples.berlioz;
 
 import com.berlioz.Berlioz;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.berlioz.Registry;
 import com.berlioz.comm.Endpoint;
+import com.berlioz.http.RestTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +43,8 @@ public class SampleApplication
             }
         });
 
+        String result = Berlioz.service("app").request().getForObject("", String.class);
+        System.out.println(result);
 
         new Scanner(System.in).nextLine(); // Don't close immediately.
     }

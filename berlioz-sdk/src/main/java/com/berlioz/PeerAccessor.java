@@ -20,6 +20,13 @@ public class PeerAccessor {
         this._peerPath = peerPath;
     }
 
+    ISelector getRandomSelector() {
+        return this._randomSelector;
+    }
+
+    ISelector getFirstSelector() {
+        return this._randomSelector;
+    }
 
     public void monitorAll(Registry.Callback<Map<String, BaseEndpoint>> cb)
     {
@@ -36,7 +43,7 @@ public class PeerAccessor {
         this._registry.subscribe("peers", this._peerPath, new Registry.Callback<Map<String, BaseEndpoint>>() {
             BaseEndpoint oldValue = null;
             public void callback(Map<String, BaseEndpoint> map) {
-                BaseEndpoint value = selector.select(map);
+                BaseEndpoint value = selector.selectFrom(map);
                 if (EqualsBuilder.reflectionEquals(oldValue, value)) {
                     return;
                 }
@@ -57,24 +64,28 @@ public class PeerAccessor {
 
     public BaseEndpoint first()
     {
-        Map<String, BaseEndpoint> peers = this.all();
-        return this._firstSelector.select(peers);
+        return this._firstSelector.select();
     }
 
     public BaseEndpoint random()
     {
-        Map<String, BaseEndpoint> peers = this.all();
-        return this._randomSelector.select(peers);
+        return this._randomSelector.select();
     }
 
     public interface ISelector {
-        BaseEndpoint select(Map<String, BaseEndpoint> map);
+        BaseEndpoint select();
+        BaseEndpoint selectFrom(Map<String, BaseEndpoint> map);
     }
 
     public class RandomSelector implements ISelector {
         private Random _random = new Random();
 
-        public BaseEndpoint select(Map<String, BaseEndpoint> map) {
+        public BaseEndpoint select() {
+            Map<String, BaseEndpoint> map = all();
+            return this.selectFrom(map);
+        }
+
+        public BaseEndpoint selectFrom(Map<String, BaseEndpoint> map) {
             Set<String> mySet = map.keySet();
             if (mySet.size() == 0) {
                 return null;
@@ -85,7 +96,12 @@ public class PeerAccessor {
     }
 
     public class FirstSelector implements ISelector {
-        public BaseEndpoint select(Map<String, BaseEndpoint> map) {
+        public BaseEndpoint select() {
+            Map<String, BaseEndpoint> map = all();
+            return this.selectFrom(map);
+        }
+
+        public BaseEndpoint selectFrom(Map<String, BaseEndpoint> map) {
             Set<String> mySet = map.keySet();
             if (mySet.size() == 0) {
                 return null;
