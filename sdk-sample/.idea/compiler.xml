@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="berlioz-sdk" target="1.5" />
-      <module name="sdk-sample" target="1.5" />
+      <module name="berlioz-sdk" target="1.8" />
+      <module name="sdk-sample" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

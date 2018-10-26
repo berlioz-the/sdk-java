@@ -29,3 +29,4 @@ hs_err_pid*
 **/out/production
 **/maven-status/
 **/maven-archiver/
+**/target/classes/
