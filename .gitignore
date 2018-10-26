@@ -30,3 +30,8 @@ hs_err_pid*
 **/maven-status/
 **/maven-archiver/
 **/target/classes/
+**/target/nexus-staging/
+**/target/apidocs/
+**/target/javadoc-bundle-options/
+**/target/*.jar.*
+**/target/*.pom*
