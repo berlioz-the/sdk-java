@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../berlioz-sdk/target/nexus-staging/staging/780883b979dcd8/com/berlioz/berlioz-sdk/1.1/berlioz-sdk-1.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../berlioz-sdk/target/nexus-staging/staging/780883b979dcd8/com/berlioz/berlioz-sdk/1.1/berlioz-sdk-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../berlioz-sdk/target/nexus-staging/staging/780883b979dcd8/com/berlioz/berlioz-sdk/1.1/berlioz-sdk-1.1-javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:/Repos/berlioz-corp/sdk-java.git/berlioz-sdk/berlioz-sdk.iml" filepath="D:/Repos/berlioz-corp/sdk-java.git/berlioz-sdk/berlioz-sdk.iml" />
+      <module fileurl="file://D:/Repos/berlioz-corp/sdk-java.git/dev/sample-1/sample-1.iml" filepath="D:/Repos/berlioz-corp/sdk-java.git/dev/sample-1/sample-1.iml" />
+    </modules>
+  </component>
+</project>
