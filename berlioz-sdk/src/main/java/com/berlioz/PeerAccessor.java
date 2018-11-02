@@ -4,7 +4,6 @@ import com.berlioz.msg.BaseEndpoint;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.*;
 
 public class PeerAccessor {
@@ -20,11 +19,15 @@ public class PeerAccessor {
         this._peerPath = peerPath;
     }
 
-    ISelector getRandomSelector() {
+    public String getRemoteName() {
+        return String.join("-", this._peerPath);
+    }
+
+    public ISelector getRandomSelector() {
         return this._randomSelector;
     }
 
-    ISelector getFirstSelector() {
+    public ISelector getFirstSelector() {
         return this._randomSelector;
     }
 

@@ -43,7 +43,6 @@ public class HelloController {
         } catch (Exception ex) {
 
         }
-
         Span childSpan = tracer.newChild(span.context()).remoteServiceName("database").name("query").annotate("RECV").start();
         try {
             Thread.sleep(50);

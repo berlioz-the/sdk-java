@@ -7,9 +7,11 @@ import org.apache.logging.log4j.Logger;
 
 public class Berlioz {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
+
     static Registry registry = new Registry();
     static PolicyResolver policy = new PolicyResolver(registry);
     private static Processor processor = new Processor(registry);
+    static Zipkin zipkin = new Zipkin(policy);
 
     public static Sector sector(String name) {
         return new Sector(name);

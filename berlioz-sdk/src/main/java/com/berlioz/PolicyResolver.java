@@ -1,12 +1,15 @@
 package com.berlioz;
 
+import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Policy;
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class PolicyResolver {
     private static Logger logger = LogManager.getLogger(PolicyResolver.class);
@@ -63,6 +66,60 @@ public class PolicyResolver {
         }
         return value;
     }
+
+    public void monitor(String name, List<String> target, Registry.Callback<Object> cb) {
+        this._registry.subscribe("policies", ListHelper.Path(), new Registry.Callback<Policy>() {
+            Object oldValue = null;
+            public void callback(Policy x) {
+                Object value = resolve(name, target);
+                if (!Objects.equals(oldValue, value)) {
+                    oldValue = value;
+                    cb.callback(value);
+                }
+            }
+        });
+    }
+
+    public void monitorString(String name, List<String> target, Registry.Callback<String> cb) {
+        this._registry.subscribe("policies", ListHelper.Path(), new Registry.Callback<Policy>() {
+            Object oldValue = null;
+            public void callback(Policy x) {
+                String value = resolveString(name, target);
+                if (!Objects.equals(oldValue, value)) {
+                    oldValue = value;
+                    cb.callback(value);
+                }
+            }
+        });
+    }
+
+    public void monitorInt(String name, List<String> target, Registry.Callback<Integer> cb) {
+        this._registry.subscribe("policies", ListHelper.Path(), new Registry.Callback<Policy>() {
+            Object oldValue = null;
+            public void callback(Policy x) {
+                int value = resolveInt(name, target);
+                if (!Objects.equals(oldValue, value)) {
+                    oldValue = value;
+                    cb.callback(value);
+                }
+            }
+        });
+    }
+
+    public void monitorBool(String name, List<String> target, Registry.Callback<Boolean> cb) {
+        this._registry.subscribe("policies", ListHelper.Path(), new Registry.Callback<Policy>() {
+            Object oldValue = null;
+            public void callback(Policy x) {
+                boolean value = resolveBool(name, target);
+                if (!Objects.equals(oldValue, value)) {
+                    oldValue = value;
+                    cb.callback(value);
+                }
+            }
+        });
+    }
+
+
 
     private Object _resolve(Policy policy, String name, List<String> target, int index) {
         Object value = null;

@@ -1,5 +1,7 @@
 package com.berlioz;
 
+import brave.Span;
+import com.berlioz.msg.BaseEndpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +12,8 @@ public class Executor<TResult, TError extends Throwable> {
     private PeerAccessor.ISelector _peerSelector;
     private IAction<TResult, TError> _action;
     private int _tryCount = 0;
+    private String _remoteName = "";
+    private String _actionName = "";
 
     public Executor()
     {
@@ -28,6 +32,13 @@ public class Executor<TResult, TError extends Throwable> {
         return this;
     }
 
+    public Executor zipkin(String remoteName, String actionName)
+    {
+        this._remoteName = remoteName;
+        this._actionName = actionName;
+        return this;
+    }
+
     public TResult run() throws TError {
         logger.info("Executing ...");
         return this._try();
@@ -36,9 +47,14 @@ public class Executor<TResult, TError extends Throwable> {
     private TResult _try() throws TError {
         this._tryCount++;
         logger.debug("Trying x{}...", this._tryCount);
+        Span span = Zipkin.getInstance().childSpan(this._remoteName, this._actionName).annotate("cs");
         try {
-            return this._action.perform();
+            BaseEndpoint peer = this._peerSelector.select();
+            TResult result = this._action.perform(peer, span);
+            span.annotate("cr");
+            return result;
         } catch(Throwable error) {
+            span.annotate("cr");
             logger.warn("Trying x{} failed.", this._tryCount);
             if (this._tryCount >= this._resolvePolicyInt("retry-count")) {
                 throw (TError)error;
@@ -60,11 +76,13 @@ public class Executor<TResult, TError extends Throwable> {
 
         logger.debug("Sleeping {}ms...", timeout);
         if (timeout > 0) {
+            Span span = Zipkin.getInstance().childSpan("sleep", "sleep").annotate("cs");
             try {
                 Thread.sleep(timeout);
             } catch(InterruptedException ex) {
                 logger.error(ex);
             }
+            span.annotate("cr");
         }
     }
 
@@ -84,6 +102,6 @@ public class Executor<TResult, TError extends Throwable> {
     }
 
     public interface IAction<TResult, TError extends Throwable> {
-        TResult perform() throws TError;
+        TResult perform(BaseEndpoint peer, brave.Span span) throws TError;
     }
 }
