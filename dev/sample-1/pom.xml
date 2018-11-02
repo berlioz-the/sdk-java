@@ -30,6 +30,12 @@
             <artifactId>zipkin-sender-urlconnection</artifactId>
             <version>2.7.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave</artifactId>
+            <version>5.5.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
