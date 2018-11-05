@@ -1,8 +1,12 @@
 package com.berlioz;
 
-import brave.Span;
 import brave.Tracer;
 import brave.Tracing;
+import brave.internal.Nullable;
+import brave.propagation.B3Propagation;
+import brave.propagation.Propagation;
+import brave.propagation.TraceContext;
+import brave.propagation.TraceContextOrSamplingFlags;
 import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +20,6 @@ import zipkin2.reporter.urlconnection.URLConnectionSender;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class Zipkin {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
@@ -43,6 +46,19 @@ public class Zipkin {
                 _monitorServiceAddresses(value);
             }
         });
+
+//        // TODO: DEBUGGING!!
+//        _sender = URLConnectionSender.newBuilder()
+//                .endpoint("http://localhost:40009" + "/api/v2/spans")
+//                .encoding(Encoding.JSON)
+//                .build();
+//        _reporter = AsyncReporter.create(_sender); // Reporter.CONSOLE;
+//        _tracing = Tracing.newBuilder()
+//                .localServiceName(_localName)
+//                .spanReporter(_reporter)
+//                .build();
+//        _tracer = _tracing.tracer();
+//        _isEnabled = true;
     }
 
     private void _monitorServiceAddresses(String serviceId) {
@@ -64,15 +80,12 @@ public class Zipkin {
                 .endpoint(peer.getProtocol() + "://" + peer.getAddress() + ":" + peer.getPort() + "/api/v2/spans")
                 .encoding(Encoding.JSON)
                 .build();
-
         _reporter = AsyncReporter.create(_sender); // Reporter.CONSOLE;
-
         _tracing = Tracing.newBuilder()
                 .localServiceName(_localName)
                 .spanReporter(_reporter)
                 .build();
         _tracer = _tracing.tracer();
-
         _isEnabled = true;
     }
 
@@ -95,54 +108,150 @@ public class Zipkin {
         }
     }
 
+    TraceContext.Extractor<HttpServletRequest> extractor =
+        B3Propagation.B3_STRING.extractor(new Propagation.Getter<HttpServletRequest, String>() {
+            @Nullable
+            public String get(HttpServletRequest request, String header) {
+                return request.getHeader(header);
+            }
+        });
+
     public void startServer(HttpServletRequest request)
     {
-        brave.Span span = _tracer.newTrace()
-                .name(request.getMethod())
-                .tag("http.url", request.getRequestURL().toString())
-                .annotate("sr");
+        if (!_isEnabled) {
+            return;
+        }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("BERLIOZ_SPAN", span);
+        brave.Span span = null;
+
+        TraceContextOrSamplingFlags contextOrFlags = extractor.extract(request);
+        if (contextOrFlags == TraceContextOrSamplingFlags.EMPTY) {
+            span = _tracer.newTrace()
+                    .name(request.getMethod())
+                    .tag("http.url", request.getRequestURL().toString())
+                    .annotate("sr");
+        } else if (contextOrFlags == TraceContextOrSamplingFlags.NOT_SAMPLED) {
+            span = null;
+        }
+        else
+        {
+            span = _tracer.nextSpan(contextOrFlags);
+        }
+
+        if (span == null) {
+            return;
+        }
+        request.setAttribute("BERLIOZ_SPAN", span);
     }
 
     public void finishServer(HttpServletRequest request, HttpServletResponse response)
     {
-        HttpSession session = request.getSession();
-        brave.Span span = (brave.Span)session.getAttribute("BERLIOZ_SPAN");
+        brave.Span span = getSpanFromRequest(request);
+        if (span == null) {
+            return;
+        }
         span.tag("http.status_code", String.valueOf(response.getStatus()));
         span.annotate("ss");
     }
 
     public Span childSpan(String name, String action)
     {
-        Span parentSpan = getCurrentSpan();
+        brave.Span parentSpan = getCurrentSpan();
         if (parentSpan == null) {
-            return null;
+            return NOOP_SPAN;
         }
         if (!_isEnabled) {
-            return null;
+            return NOOP_SPAN;
         }
-        return _tracer.newChild(parentSpan.context()).remoteServiceName(name).name(action);
+
+        brave.Span childSpan = _tracer.newChild(parentSpan.context()).remoteServiceName(name).name(action);
+        return new RealSpan(childSpan);
     }
 
-    private static Span getCurrentSpan() {
+    private brave.Span getCurrentSpan() {
         HttpServletRequest request = getCurrentHttpRequest();
         if (request == null) {
-            return null;
+            return defaultSpan();
         }
-        HttpSession session = request.getSession();
-        brave.Span span = (brave.Span)session.getAttribute("BERLIOZ_SPAN");
-        return span;
+        return getSpanFromRequest(request);
     }
 
-    private static HttpServletRequest getCurrentHttpRequest() {
+    private brave.Span getSpanFromRequest(HttpServletRequest request) {
+        Object obj = request.getAttribute("BERLIOZ_SPAN");
+        if (obj instanceof  brave.Span) {
+            return (brave.Span)obj;
+        }
+        return defaultSpan();
+    }
+
+    private brave.Span defaultSpan() {
+        return null;
+    }
+
+    private HttpServletRequest getCurrentHttpRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes) {
             HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
             return request;
         }
         return null;
+    }
+
+    public interface Span {
+        Span annotate(String value);
+        Span tag(String key, String value);
+        void finish();
+    }
+
+    class RealSpan implements Span
+    {
+        brave.Span _innerSpan;
+
+        RealSpan(brave.Span innerSpan)
+        {
+            this._innerSpan = innerSpan;
+            this._innerSpan.annotate("cs");
+        }
+
+        public Span annotate(String value)
+        {
+            this._innerSpan.annotate(value);
+            return this;
+        }
+
+        public Span tag(String key, String value)
+        {
+            this._innerSpan.tag(key, value);
+            return this;
+        }
+
+        public void finish()
+        {
+            this._innerSpan.annotate("cr");
+        }
+    }
+
+    NoopSpan NOOP_SPAN = new NoopSpan();
+
+    class NoopSpan implements Span
+    {
+        NoopSpan()
+        {
+        }
+
+        public Span annotate(String value)
+        {
+            return this;
+        }
+
+        public Span tag(String key, String value)
+        {
+            return this;
+        }
+
+        public void finish()
+        {
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.berlioz.http;
 
 import com.berlioz.Executor;
 import com.berlioz.PeerAccessor;
+import com.berlioz.Zipkin;
 import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +46,7 @@ public class RestTemplate extends org.springframework.web.client.RestTemplate {
         executor.zipkin(_peerAccessor.getRemoteName(), method.toString());
         executor.selector(this._peerAccessor.getRandomSelector());
         executor.action(new Executor.IAction<T, RestClientException>() {
-            public T perform(BaseEndpoint basePeer, brave.Span span) throws RestClientException {
+            public T perform(BaseEndpoint basePeer, Zipkin.Span span) throws RestClientException {
                 Endpoint peer = (Endpoint)basePeer;
 //                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40002, url.getRawPath());
                 String newUrlStr = String.format("%s://%s:%d%s", peer.getProtocol(), peer.getAddress(), peer.getPort(), url.getRawPath());

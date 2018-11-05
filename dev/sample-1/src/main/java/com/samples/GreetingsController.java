@@ -1,6 +1,5 @@
 package com.samples;
 
-import brave.Span;
 import com.berlioz.Berlioz;
 import com.berlioz.Zipkin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +13,13 @@ public class GreetingsController {
 
         String result = Berlioz.service("app").request().getForObject("/", String.class);
 
-        Span childSpan = Zipkin.getInstance().childSpan("db", "INSERT").annotate("cs");
+        Zipkin.Span childSpan = Zipkin.getInstance().childSpan("db", "INSERT");
         try {
             Thread.sleep(50);
         } catch (Exception ex) {
 
         }
-        childSpan.annotate("cr");
+        childSpan.finish();
 
         return "Greetings!!! "; // + result;
         //Berlioz.service("app").all().toString() ;

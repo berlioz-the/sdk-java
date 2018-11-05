@@ -1,6 +1,5 @@
 package com.berlioz;
 
-import brave.Span;
 import com.berlioz.msg.BaseEndpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,14 +46,14 @@ public class Executor<TResult, TError extends Throwable> {
     private TResult _try() throws TError {
         this._tryCount++;
         logger.debug("Trying x{}...", this._tryCount);
-        Span span = Zipkin.getInstance().childSpan(this._remoteName, this._actionName).annotate("cs");
+        Zipkin.Span span = Zipkin.getInstance().childSpan(this._remoteName, this._actionName);
         try {
             BaseEndpoint peer = this._peerSelector.select();
             TResult result = this._action.perform(peer, span);
-            span.annotate("cr");
+            span.finish();
             return result;
         } catch(Throwable error) {
-            span.annotate("cr");
+            span.finish();
             logger.warn("Trying x{} failed.", this._tryCount);
             if (this._tryCount >= this._resolvePolicyInt("retry-count")) {
                 throw (TError)error;
@@ -76,13 +75,13 @@ public class Executor<TResult, TError extends Throwable> {
 
         logger.debug("Sleeping {}ms...", timeout);
         if (timeout > 0) {
-            Span span = Zipkin.getInstance().childSpan("sleep", "sleep").annotate("cs");
+            Zipkin.Span span = Zipkin.getInstance().childSpan("sleep", "sleep");
             try {
                 Thread.sleep(timeout);
             } catch(InterruptedException ex) {
                 logger.error(ex);
             }
-            span.annotate("cr");
+            span.finish();
         }
     }
 
@@ -102,6 +101,6 @@ public class Executor<TResult, TError extends Throwable> {
     }
 
     public interface IAction<TResult, TError extends Throwable> {
-        TResult perform(BaseEndpoint peer, brave.Span span) throws TError;
+        TResult perform(BaseEndpoint peer, Zipkin.Span span) throws TError;
     }
 }
