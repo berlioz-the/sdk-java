@@ -13,16 +13,7 @@ public class GreetingsController {
 
         String result = Berlioz.service("app").request().getForObject("/", String.class);
 
-        Zipkin.Span childSpan = Zipkin.getInstance().childSpan("db", "INSERT");
-        try {
-            Thread.sleep(50);
-        } catch (Exception ex) {
-
-        }
-        childSpan.finish();
-
-        return "Greetings!!! "; // + result;
-        //Berlioz.service("app").all().toString() ;
+        return "Greetings!!! <b>" + result + "</b>";
     }
 
 }

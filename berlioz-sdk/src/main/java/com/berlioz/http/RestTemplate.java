@@ -8,10 +8,12 @@ import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestClientException;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
 
@@ -48,11 +50,24 @@ public class RestTemplate extends org.springframework.web.client.RestTemplate {
         executor.action(new Executor.IAction<T, RestClientException>() {
             public T perform(BaseEndpoint basePeer, Zipkin.Span span) throws RestClientException {
                 Endpoint peer = (Endpoint)basePeer;
-//                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40002, url.getRawPath());
+                // TODO: DEBUGGING.
+//                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40003, url.getRawPath());
                 String newUrlStr = String.format("%s://%s:%d%s", peer.getProtocol(), peer.getAddress(), peer.getPort(), url.getRawPath());
                 URI actualUrl = URI.create(newUrlStr);
                 logger.debug("Request to: {}, Method: {}", actualUrl, method);
-                return RestTemplate.super.doExecute(actualUrl, method, requestCallback, responseExtractor);
+                return RestTemplate.super.doExecute(actualUrl, method,
+                    new RequestCallback() {
+                        @Override
+                        public void doWithRequest(ClientHttpRequest request) throws IOException {
+                            if (span.isSampled()) {
+                                span.inject(request);
+                            } else {
+                                request.getHeaders().set("x-b3-sampled", "0");
+                            }
+                            requestCallback.doWithRequest(request);
+                        }
+                    },
+                    responseExtractor);
         }});
         return executor.run();
     }

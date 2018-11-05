@@ -10,6 +10,7 @@ import brave.propagation.TraceContextOrSamplingFlags;
 import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -47,12 +48,12 @@ public class Zipkin {
             }
         });
 
-//        // TODO: DEBUGGING!!
+        // TODO: DEBUGGING!!
 //        _sender = URLConnectionSender.newBuilder()
 //                .endpoint("http://localhost:40009" + "/api/v2/spans")
 //                .encoding(Encoding.JSON)
 //                .build();
-//        _reporter = AsyncReporter.create(_sender); // Reporter.CONSOLE;
+//        _reporter = AsyncReporter.create(_sender); // Reporter.CONSOLE; //
 //        _tracing = Tracing.newBuilder()
 //                .localServiceName(_localName)
 //                .spanReporter(_reporter)
@@ -80,7 +81,7 @@ public class Zipkin {
                 .endpoint(peer.getProtocol() + "://" + peer.getAddress() + ":" + peer.getPort() + "/api/v2/spans")
                 .encoding(Encoding.JSON)
                 .build();
-        _reporter = AsyncReporter.create(_sender); // Reporter.CONSOLE;
+        _reporter = AsyncReporter.create(_sender);
         _tracing = Tracing.newBuilder()
                 .localServiceName(_localName)
                 .spanReporter(_reporter)
@@ -116,6 +117,15 @@ public class Zipkin {
             }
         });
 
+    TraceContext.Injector<ClientHttpRequest> injector =
+        B3Propagation.B3_STRING.injector(new Propagation.Setter<ClientHttpRequest, String>() {
+            @Override
+            public void put(ClientHttpRequest httpServletRequest, String header, String value) {
+                logger.debug("Setting header {} = {}", header, value);
+                httpServletRequest.getHeaders().set(header, value);
+            }
+        });
+
     public void startServer(HttpServletRequest request)
     {
         if (!_isEnabled) {
@@ -141,6 +151,7 @@ public class Zipkin {
         if (span == null) {
             return;
         }
+        logger.debug("Start server span: {}", span);
         request.setAttribute("BERLIOZ_SPAN", span);
     }
 
@@ -198,8 +209,10 @@ public class Zipkin {
     }
 
     public interface Span {
+        boolean isSampled();
         Span annotate(String value);
         Span tag(String key, String value);
+        void inject(ClientHttpRequest request);
         void finish();
     }
 
@@ -211,6 +224,16 @@ public class Zipkin {
         {
             this._innerSpan = innerSpan;
             this._innerSpan.annotate("cs");
+        }
+
+        public void inject(ClientHttpRequest request)
+        {
+            injector.inject(_innerSpan.context(), request);
+        }
+
+        public boolean isSampled()
+        {
+            return true;
         }
 
         public Span annotate(String value)
@@ -229,6 +252,11 @@ public class Zipkin {
         {
             this._innerSpan.annotate("cr");
         }
+
+        @Override
+        public String toString() {
+            return this._innerSpan.toString();
+        }
     }
 
     NoopSpan NOOP_SPAN = new NoopSpan();
@@ -237,6 +265,15 @@ public class Zipkin {
     {
         NoopSpan()
         {
+        }
+
+        public void inject(ClientHttpRequest request)
+        {
+        }
+
+        public boolean isSampled()
+        {
+            return false;
         }
 
         public Span annotate(String value)

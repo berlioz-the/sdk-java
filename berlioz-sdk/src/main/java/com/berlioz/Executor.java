@@ -47,6 +47,8 @@ public class Executor<TResult, TError extends Throwable> {
         this._tryCount++;
         logger.debug("Trying x{}...", this._tryCount);
         Zipkin.Span span = Zipkin.getInstance().childSpan(this._remoteName, this._actionName);
+        logger.debug("Child Span: {}", span);
+
         try {
             BaseEndpoint peer = this._peerSelector.select();
             TResult result = this._action.perform(peer, span);

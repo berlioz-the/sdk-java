@@ -2,7 +2,6 @@ package com.berlioz.spring;
 
 import com.berlioz.Zipkin;
 import org.springframework.lang.Nullable;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
