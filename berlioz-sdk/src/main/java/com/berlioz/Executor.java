@@ -50,7 +50,10 @@ public class Executor<TResult, TError extends Throwable> {
         logger.debug("Child Span: {}", span);
 
         try {
-            BaseEndpoint peer = this._peerSelector.select();
+            BaseEndpoint peer = null;
+            if (this._peerSelector != null) {
+                peer = this._peerSelector.select();
+            }
             TResult result = this._action.perform(peer, span);
             span.finish();
             return result;

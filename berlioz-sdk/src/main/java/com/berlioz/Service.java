@@ -3,6 +3,7 @@ package com.berlioz;
 import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Endpoint;
 import com.berlioz.http.RestTemplate;
+import com.berlioz.mysql.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -69,6 +70,10 @@ public class Service {
     {
         RestTemplate restTemplate = new RestTemplate(this._peerAccessor);
         return restTemplate;
+    }
+
+    public Driver mysql() {
+        return new Driver(this._peerAccessor);
     }
 
     private Map<String, Endpoint> castPeers(Map<String, BaseEndpoint> map)

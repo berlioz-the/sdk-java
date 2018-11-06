@@ -39,5 +39,7 @@
     <orderEntry type="library" name="Maven: io.zipkin.zipkin2:zipkin:2.11.7" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-reporter:2.7.10" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-sender-urlconnection:2.7.10" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.12" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.6.0" level="project" />
   </component>
 </module>

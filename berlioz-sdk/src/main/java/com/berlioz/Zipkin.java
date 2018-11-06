@@ -81,7 +81,7 @@ public class Zipkin {
                 .endpoint(peer.getProtocol() + "://" + peer.getAddress() + ":" + peer.getPort() + "/api/v2/spans")
                 .encoding(Encoding.JSON)
                 .build();
-        _reporter = AsyncReporter.create(_sender);
+        _reporter = Reporter.CONSOLE;// AsyncReporter.create(_sender);
         _tracing = Tracing.newBuilder()
                 .localServiceName(_localName)
                 .spanReporter(_reporter)
