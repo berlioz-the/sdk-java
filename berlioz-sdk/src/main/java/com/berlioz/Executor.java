@@ -39,15 +39,15 @@ public class Executor<TResult, TError extends Throwable> {
     }
 
     public TResult run() throws TError {
-        logger.info("Executing ...");
+        logger.info("Executing {}::{}...", this._remoteName, this._actionName);
         return this._try();
     }
 
     private TResult _try() throws TError {
         this._tryCount++;
-        logger.debug("Trying x{}...", this._tryCount);
+        logger.debug("Trying {}::{} x{}...", this._remoteName, this._actionName, this._tryCount);
         Zipkin.Span span = Zipkin.getInstance().childSpan(this._remoteName, this._actionName);
-        logger.debug("Child Span: {}", span);
+//        logger.debug("Child Span: {}", span);
 
         try {
             BaseEndpoint peer = null;
@@ -59,7 +59,7 @@ public class Executor<TResult, TError extends Throwable> {
             return result;
         } catch(Throwable error) {
             span.finish();
-            logger.warn("Trying x{} failed.", this._tryCount);
+            logger.warn("Trying {}::{} x{} failed.", this._remoteName, this._actionName, this._tryCount);
             if (this._tryCount >= this._resolvePolicyInt("retry-count")) {
                 throw (TError)error;
             } else {

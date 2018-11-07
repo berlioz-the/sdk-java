@@ -37,4 +37,8 @@ public class Driver {
         java.util.Properties info = new java.util.Properties();
         return (getConnection(url, info));
     }
+
+    public Connection getConnection(DataSourceConfiguration config) throws SQLException {
+        return getConnection(config.url, config.username, config.password);
+    }
 }
