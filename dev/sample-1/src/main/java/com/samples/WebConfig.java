@@ -11,6 +11,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new com.berlioz.spring.Handler());
+//        registry.addInterceptor(new com.berlioz.spring.Handler());
     }
 }
