@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class MySqlConnection implements Connection {
-    private static Logger logger = LogManager.getLogger(RestTemplate.class);
+    private static Logger logger = LogManager.getLogger(MySqlConnection.class);
     private static Pattern URL_PATTERN = Pattern.compile("jdbc:\\w+:\\/\\/([\\w|\\d|:|.]+)\\/.*", Pattern.CASE_INSENSITIVE);
 
     PeerAccessor _peerAccessor;
@@ -28,7 +28,7 @@ class MySqlConnection implements Connection {
         this._peerAccessor = peerAccessor;
         this._url = url;
         this._properties = properties;
-        this._getInner();
+//        this._getInner();
     }
 
     Connection _getInner() throws SQLException
@@ -44,7 +44,7 @@ class MySqlConnection implements Connection {
             public Connection perform(BaseEndpoint basePeer, Zipkin.Span span) throws SQLException {
                 Endpoint peer = (Endpoint)basePeer;
                 String actualUrl = massageUrl(peer);
-                logger.debug("Connecting to: {}", actualUrl);
+                logger.info("Connecting to: {}", actualUrl);
                 return DriverManager.getConnection(actualUrl , _properties);
             }});
         _inner = executor.run();
@@ -54,9 +54,14 @@ class MySqlConnection implements Connection {
     private String massageUrl(Endpoint peer) {
         Matcher m = URL_PATTERN.matcher(_url);
         StringBuffer sb = new StringBuffer();
-        String hostPort = peer.getAddress() + ":" + String.valueOf(peer.getPort());
-        // TODO: Debugging
-//        hostPort = "localhost:40012";
+        String hostPort;
+        if (peer == null) {
+            hostPort = "0.0.0.0";
+        } else {
+            hostPort = peer.getAddress() + ":" + String.valueOf(peer.getPort());
+            // TODO: Debugging
+//            hostPort = "localhost:40005";
+        }
         while (m.find()) {
             m.appendReplacement(sb, m.group(0).replaceFirst(Pattern.quote(m.group(1)), hostPort));
         }
@@ -75,7 +80,11 @@ class MySqlConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return this._getInner().prepareStatement(sql);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql));
+            }
+        });
     }
 
     @Override
@@ -85,7 +94,11 @@ class MySqlConnection implements Connection {
 
     @Override
     public String nativeSQL(String sql) throws SQLException {
-        return this._getInner().nativeSQL(sql);
+        return execute("nativeSQL", new InnerAction<String>() {
+            public String perform(Connection connection) throws SQLException {
+                return connection.nativeSQL(sql);
+            }
+        });
     }
 
     @Override
@@ -110,12 +123,21 @@ class MySqlConnection implements Connection {
 
     @Override
     public void close() throws SQLException {
-        this._getInner().close();
+        Connection inner = _inner;
+        if (inner != null) {
+            logger.info("Closing connection...");
+            inner.close();
+            _inner = null;
+        }
     }
 
     @Override
     public boolean isClosed() throws SQLException {
-        return this._getInner().isClosed();
+        Connection inner = _inner;
+        if (inner != null) {
+            return inner.isClosed();
+        }
+        return true;
     }
 
     @Override
@@ -170,7 +192,11 @@ class MySqlConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        return this._getInner().prepareCall(sql, resultSetType, resultSetConcurrency);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql, resultSetType, resultSetConcurrency));
+            }
+        });
     }
 
     @Override
@@ -220,12 +246,20 @@ class MySqlConnection implements Connection {
 
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return this._getInner().createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
+        return execute("createStatement", new InnerAction<Statement>() {
+            public Statement perform(Connection connection) throws SQLException {
+                return new MySqlStatement(_peerAccessor, connection.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability));
+            }
+        });
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return this._getInner().prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability));
+            }
+        });
     }
 
     @Override
@@ -235,17 +269,29 @@ class MySqlConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws SQLException {
-        return this._getInner().prepareStatement(sql, autoGeneratedKeys);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql, autoGeneratedKeys));
+            }
+        });
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException {
-        return this._getInner().prepareStatement(sql, columnIndexes);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql, columnIndexes));
+            }
+        });
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException {
-        return this._getInner().prepareStatement(sql, columnNames);
+        return execute("prepareStatement", new InnerAction<PreparedStatement>() {
+            public PreparedStatement perform(Connection connection) throws SQLException {
+                return new MySqlPreparedStatement(_peerAccessor, connection.prepareStatement(sql, columnNames));
+            }
+        });
     }
 
     @Override
