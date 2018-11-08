@@ -3,7 +3,6 @@ package com.berlioz;
 import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Endpoint;
 import com.berlioz.http.RestTemplate;
-import com.berlioz.mysql.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +26,10 @@ public class Service {
         this(id);
         this._endpoint = endpoint;
         this._peerAccessor = new PeerAccessor(ListHelper.Path(this._id, this._endpoint));
+    }
+
+    public PeerAccessor getPeerAccessor() {
+        return this._peerAccessor;
     }
 
     public void monitorAll(final Registry.Callback<Map<String, Endpoint>> cb)
@@ -70,10 +73,6 @@ public class Service {
     {
         RestTemplate restTemplate = new RestTemplate(this._peerAccessor);
         return restTemplate;
-    }
-
-    public Driver mysql() {
-        return new Driver(this._peerAccessor);
     }
 
     private Map<String, Endpoint> castPeers(Map<String, BaseEndpoint> map)

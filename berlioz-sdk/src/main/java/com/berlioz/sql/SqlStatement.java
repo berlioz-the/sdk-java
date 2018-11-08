@@ -1,4 +1,4 @@
-package com.berlioz.mysql;
+package com.berlioz.sql;
 
 import com.berlioz.PeerAccessor;
 import com.berlioz.Zipkin;
@@ -6,12 +6,12 @@ import com.berlioz.msg.BaseEndpoint;
 
 import java.sql.*;
 
-public class MySqlStatement implements Statement {
+public class SqlStatement implements Statement {
 
     PeerAccessor _peerAccessor;
     Statement _inner;
 
-    MySqlStatement(PeerAccessor peerAccessor, Statement inner)
+    SqlStatement(PeerAccessor peerAccessor, Statement inner)
     {
         this._peerAccessor = peerAccessor;
         this._inner = inner;
