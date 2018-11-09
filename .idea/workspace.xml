@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="03ce05df-9305-4afa-a21a-4a6aca743060" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/http/RestTemplateBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/DataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/DataSourceBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/DataSourceConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/SqlConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/SqlPreparedStatement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/java/com/berlioz/sql/SqlStatement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/berlioz-sdk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/berlioz-sdk/berlioz-sdk.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/berlioz-sdk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/Berlioz.java" beforeDir="false" afterPath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/Berlioz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/http/RestTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/http/RestTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/DataSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/DataSourceBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/DataSourceConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/SqlConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/SqlPreparedStatement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/berlioz-sdk/src/main/java/com/berlioz/sql/SqlStatement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_classmate_1_3_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__com_google_guava_guava_r05.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__commons_lang_commons_lang_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__javax_websocket_javax_websocket_api_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_34.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_5_34.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_5_34.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_framework_2_3_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_http_2_3_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_http_server_2_3_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_client_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_container_grizzly_client_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_container_grizzly_server_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_core_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_server_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_spi_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_12_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_0_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_aop_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_aop_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_asm_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_beans_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_beans_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_context_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_context_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_core_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_core_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_expression_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_expression_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_web_3_0_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_web_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_springframework_spring_webmvc_5_0_9_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/libraries/Maven__org_yaml_snakeyaml_1_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/libraries/1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/libraries/apidocs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/libraries/target.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/old-run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/sample-1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/controller/DbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/entity/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/repository/ContactRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/java/com/samples/service/ContactService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-1/src/main/resources/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/sample-workspace.iml" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-985610623">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="2583" />
+    <option name="height" value="1404" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="03ce05df-9305-4afa-a21a-4a6aca743060" name="Default Changelist" comment="" />
+      <created>1541720052666</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541720052666</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1721" height="935" extended-state="6" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24984948" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

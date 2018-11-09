@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://D:/Repos/berlioz-corp/sdk-java.git/dev/sql/sample">
+      <sourceFolder url="file://D:/Repos/berlioz-corp/sdk-java.git/dev/sql/sample/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://D:/Repos/berlioz-corp/sdk-java.git/dev/sql/sample/src/main/resources" type="java-resource" />
+      <excludeFolder url="file://D:/Repos/berlioz-corp/sdk-java.git/dev/sql/sample/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="berlioz-sdk" />
+  </component>
+</module>

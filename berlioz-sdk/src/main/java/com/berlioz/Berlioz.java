@@ -18,7 +18,7 @@ public class Berlioz {
     }
 
     public static Service service(String name) {
-        return service(name, "default");
+        return service(name, null);
     }
 
     public static Service service(String name, String endpoint) {

@@ -50,8 +50,11 @@ public class RestTemplate extends org.springframework.web.client.RestTemplate {
         executor.action(new Executor.IAction<T, RestClientException>() {
             public T perform(BaseEndpoint basePeer, Zipkin.Span span) throws RestClientException {
                 Endpoint peer = (Endpoint)basePeer;
+                if (basePeer == null) {
+                    throw new RestClientException("No peer present.");
+                }
                 // TODO: DEBUGGING.
-//                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40003, url.getRawPath());
+//                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40004, url.getRawPath());
                 String newUrlStr = String.format("%s://%s:%d%s", peer.getProtocol(), peer.getAddress(), peer.getPort(), url.getRawPath());
                 URI actualUrl = URI.create(newUrlStr);
                 logger.debug("Request to: {}, Method: {}", actualUrl, method);

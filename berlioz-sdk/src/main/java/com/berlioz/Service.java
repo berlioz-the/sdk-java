@@ -2,7 +2,6 @@ package com.berlioz;
 
 import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Endpoint;
-import com.berlioz.http.RestTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +23,9 @@ public class Service {
     Service(String id, String endpoint)
     {
         this(id);
+        if (endpoint == null) {
+            endpoint = "default";
+        }
         this._endpoint = endpoint;
         this._peerAccessor = new PeerAccessor(ListHelper.Path(this._id, this._endpoint));
     }
@@ -67,12 +69,6 @@ public class Service {
     {
         BaseEndpoint ep = this._peerAccessor.random();
         return castPeer(ep);
-    }
-
-    public RestTemplate request()
-    {
-        RestTemplate restTemplate = new RestTemplate(this._peerAccessor);
-        return restTemplate;
     }
 
     private Map<String, Endpoint> castPeers(Map<String, BaseEndpoint> map)
