@@ -7,6 +7,7 @@ import brave.propagation.B3Propagation;
 import brave.propagation.Propagation;
 import brave.propagation.TraceContext;
 import brave.propagation.TraceContextOrSamplingFlags;
+import com.berlioz.msg.BaseEndpoint;
 import com.berlioz.msg.Endpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,10 +67,10 @@ public class Zipkin {
         logger.debug("DTrace Provider: {}", serviceId);
         this._cleanup();
 
-        Service zipkinSvc = new Service(serviceId, "client");
-        zipkinSvc.monitorFirst(new Registry.Callback<Endpoint>() {
-            public void callback(Endpoint peer) {
-                _setupServicePeer(peer);
+        PeerAccessor peerAccessor = new PeerAccessor(ListHelper.Path(serviceId));
+        peerAccessor.monitorFirst(new Registry.Callback<BaseEndpoint>() {
+            public void callback(BaseEndpoint peer) {
+                _setupServicePeer((Endpoint)peer);
             }
         });
     }

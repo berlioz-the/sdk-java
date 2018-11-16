@@ -17,17 +17,18 @@ public class Service {
 
     Service(String id)
     {
-        this._id = id;
+        this(id, null);
     }
 
     Service(String id, String endpoint)
     {
-        this(id);
+        this._id = id;
         if (endpoint == null) {
             endpoint = "default";
         }
         this._endpoint = endpoint;
-        this._peerAccessor = new PeerAccessor(ListHelper.Path(this._id, this._endpoint));
+        String serviceId = this._id + "-" + this._endpoint;
+        this._peerAccessor = new PeerAccessor(ListHelper.Path(serviceId));
     }
 
     public PeerAccessor getPeerAccessor() {

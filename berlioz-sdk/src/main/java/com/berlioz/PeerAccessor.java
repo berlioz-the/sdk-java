@@ -1,6 +1,7 @@
 package com.berlioz;
 
 import com.berlioz.msg.BaseEndpoint;
+import com.berlioz.msg.PeerData;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -58,7 +59,7 @@ public class PeerAccessor {
 
     public Map<String, BaseEndpoint> all()
     {
-        Map<String, BaseEndpoint> peers = this._registry.get("peers", this._peerPath);
+        HashMap<String, BaseEndpoint> peers = this._registry.get("peers", this._peerPath);
         if (peers == null) {
             return new HashMap<String, BaseEndpoint>();
         }

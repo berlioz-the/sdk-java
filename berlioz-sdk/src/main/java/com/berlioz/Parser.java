@@ -35,9 +35,9 @@ public class Parser {
             final JsonObject peersObject = json.getAsJsonObject();
             Set<Map.Entry<String, JsonElement>> entries = peersObject.entrySet();
             Peers peers = new Peers();
-            peers.byService = new HashMap<String, BasePeerData>();
+            peers.byService = new HashMap<String, PeerData>();
             for (Map.Entry<String, JsonElement> entry: entries) {
-                BasePeerData peerData = this.parseService(entry.getKey(), entry.getValue(), context);
+                PeerData peerData = this.parseService(entry.getKey(), entry.getValue(), context);
                 if (peerData != null) {
                     peers.byService.put(entry.getKey(), peerData);
                 }
@@ -45,7 +45,7 @@ public class Parser {
             return peers;
         }
 
-        private BasePeerData parseService(String id, JsonElement json, JsonDeserializationContext context)
+        private PeerData parseService(String id, JsonElement json, JsonDeserializationContext context)
         {
             if (isEndpointService(id)) {
                 return this.parseEndpointService(json, context);
@@ -54,48 +54,30 @@ public class Parser {
             }
         }
 
-        private BasePeerData parseEndpointService(JsonElement json, JsonDeserializationContext context)
+        private PeerData parseEndpointService(JsonElement json, JsonDeserializationContext context)
         {
             final JsonObject jsonObject = json.getAsJsonObject();
 
-            ServicePeerData serviceData = new ServicePeerData();
-            serviceData.peers = new HashMap<String, Map<String, Endpoint>>();
+            PeerData serviceData = new PeerData();
+            serviceData.peers = new HashMap<>();
 
-            Set<Map.Entry<String, JsonElement>> entries = jsonObject.entrySet();
-            for (Map.Entry<String, JsonElement> entry : entries)
-            {
-                Map<String, Endpoint> endpoints = this.parseEndpoints(entry.getValue(), context);
-                if (endpoints != null) {
-                    serviceData.peers.put(entry.getKey(), endpoints);
-                }
-            }
-
-            return serviceData;
-        }
-
-        private Map<String, Endpoint> parseEndpoints(JsonElement json, JsonDeserializationContext context)
-        {
-            Map<String, Endpoint> map = new HashMap<String, Endpoint>();
-
-            final JsonObject jsonObject = json.getAsJsonObject();
             Set<Map.Entry<String, JsonElement>> entries = jsonObject.entrySet();
             for (Map.Entry<String, JsonElement> entry : entries)
             {
                 Endpoint endpointObj = context.deserialize(entry.getValue(), Endpoint.class);
                 if (endpointObj != null) {
-                    map.put(entry.getKey(), endpointObj);
+                    serviceData.peers.put(entry.getKey(), endpointObj);
                 }
             }
-
-            return map;
+            return serviceData;
         }
 
-        private NativeServicePeerData parseNativeService(JsonElement json, JsonDeserializationContext context)
+        private PeerData parseNativeService(JsonElement json, JsonDeserializationContext context)
         {
             final JsonObject jsonObject = json.getAsJsonObject();
 
-            NativeServicePeerData serviceData = new NativeServicePeerData();
-            serviceData.peers = new HashMap<String, NativeEndpoint>();
+            PeerData serviceData = new PeerData();
+            serviceData.peers = new HashMap<>();
 
             Set<Map.Entry<String, JsonElement>> entries = jsonObject.entrySet();
             for (Map.Entry<String, JsonElement> entry : entries)
@@ -105,7 +87,6 @@ public class Parser {
                     serviceData.peers .put(entry.getKey(), endpointObj);
                 }
             }
-
             return serviceData;
         }
     }

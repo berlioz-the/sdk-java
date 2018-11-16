@@ -40,7 +40,7 @@ public class Processor {
 
     private void _acceptEndpoints(Message message)
     {
-        if (message.policies == null) {
+        if (message.endpoints == null) {
             // this._registry.reset("endpoints", ListHelper.Path());
             return;
         }
@@ -57,26 +57,8 @@ public class Processor {
             return;
         }
         for(String id: message.peers.byService.keySet()) {
-            BasePeerData data = message.peers.byService.get(id);
-            if (this._parser.isEndpointService(id)) {
-                this._handleServicePeer(id, (ServicePeerData)data);
-            } else {
-                this._handleResourcePeer(id, (NativeServicePeerData)data);
-            }
+            PeerData peerData = message.peers.byService.get(id);
+            this._registry.set("peers", ListHelper.Path(id), peerData.peers);
         }
-    }
-
-    private void _handleServicePeer(String id, ServicePeerData data)
-    {
-        for(String endpoint: data.peers.keySet()) {
-            Map<String, Endpoint> endpointData = data.peers.get(endpoint);
-            this._registry.set("peers", ListHelper.Path(id, endpoint), endpointData);
-        }
-    }
-
-
-    private void _handleResourcePeer(String id, NativeServicePeerData resourceData)
-    {
-        this._registry.set("peers", ListHelper.Path(id), resourceData);
     }
 }
