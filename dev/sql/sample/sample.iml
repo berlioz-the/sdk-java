@@ -46,7 +46,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.12" level="project" />
-    <orderEntry type="library" name="Maven: com.berlioz:berlioz-sdk:1.1.13-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="berlioz-sdk" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.11.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.11.1" level="project" />
     <orderEntry type="library" name="Maven: javax.websocket:javax.websocket-api:1.1" level="project" />
@@ -68,7 +68,7 @@
     <orderEntry type="library" name="Maven: io.zipkin.zipkin2:zipkin:2.11.7" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-reporter:2.7.10" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-sender-urlconnection:2.7.10" level="project" />
-    <orderEntry type="library" name="Maven: com.berlioz:sql:1.1.13-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="sql" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.2" level="project" />

@@ -28,6 +28,13 @@ public class AppController {
 
             }
         });
+
+        Berlioz.cluster("account", "api").monitorAll(new Registry.Callback<Map<String, Endpoint>>() {
+            @Override
+            public void callback(Map<String, Endpoint> value) {
+
+            }
+        });
     }
 
     @Autowired
@@ -38,13 +45,15 @@ public class AppController {
 
         String output = "Greetings!!! <b>";
 
-        Contact[] entries = restTemplate
-                .getForObject("/entries", Contact[].class);
+        String str = restTemplate
+                .getForObject("/list", String.class);
 
-        for(Contact contact : entries)
-        {
-            output += contact.getName() + "<br />";
-        }
+        output += str;
+
+//        for(Contact contact : entries)
+//        {
+//            output += contact.getName() + "<br />";
+//        }
 
         return output;
     }

@@ -1,10 +1,9 @@
 package com.berlioz;
 
-public class Cluster {
-    String _name;
+public class Cluster extends BaseService {
 
-    Cluster(String name)
+    Cluster(String id, String endpoint)
     {
-        this._name = name;
+        super(id, endpoint);
     }
 }

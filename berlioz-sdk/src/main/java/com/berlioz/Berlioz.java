@@ -13,6 +13,15 @@ public class Berlioz {
     private static Processor processor = new Processor(registry);
     static Zipkin zipkin = new Zipkin(policy);
 
+    public static Cluster cluster(String name) {
+        return cluster(name, null);
+    }
+
+    public static Cluster cluster(String name, String endpoint) {
+        String id = String.format("cluster://%s", name);
+        return new Cluster(id, endpoint);
+    }
+
     public static Sector sector(String name) {
         return new Sector(name);
     }

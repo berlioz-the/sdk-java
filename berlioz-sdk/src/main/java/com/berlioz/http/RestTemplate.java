@@ -56,6 +56,12 @@ public class RestTemplate extends org.springframework.web.client.RestTemplate {
                 // TODO: DEBUGGING.
 //                String newUrlStr = String.format("%s://%s:%d%s", "http", "localhost", 40004, url.getRawPath());
                 String newUrlStr = String.format("%s://%s:%d%s", peer.getProtocol(), peer.getAddress(), peer.getPort(), url.getRawPath());
+                if (url.getRawQuery() != null) {
+                    newUrlStr += "?" + url.getRawQuery();
+                }
+                if (url.getRawFragment() != null) {
+                    newUrlStr += "#" + url.getRawFragment();
+                }
                 URI actualUrl = URI.create(newUrlStr);
                 logger.debug("Request to: {}, Method: {}", actualUrl, method);
                 return RestTemplate.super.doExecute(actualUrl, method,

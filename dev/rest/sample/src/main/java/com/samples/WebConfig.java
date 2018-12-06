@@ -21,7 +21,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     RestTemplate restTemplate() {
         return new com.berlioz.http.RestTemplateBuilder()
-                .service("app")
+                .cluster("account")
+                .endpoint("api")
                 .build();
     }
 
