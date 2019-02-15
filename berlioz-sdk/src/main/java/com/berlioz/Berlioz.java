@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 public class Berlioz {
     private static Logger logger = LogManager.getLogger(Berlioz.class);
 
+    private static Environment environment = new Environment();
+
     static Registry registry = new Registry();
     static PolicyResolver policy = new PolicyResolver(registry);
     private static Processor processor = new Processor(registry);
@@ -36,7 +38,12 @@ public class Berlioz {
 
     public static void run() {
         logger.info("Run...");
-        Client client = new Client(processor);
+        Client client = new Client(environment, processor);
         client.run();
+    }
+
+    public static String getEnv(String name)
+    {
+        return environment.get(name);
     }
 }

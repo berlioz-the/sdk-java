@@ -1,5 +1,6 @@
 package com.berlioz.agent;
 
+import com.berlioz.Environment;
 import com.berlioz.Processor;
 import org.glassfish.tyrus.client.ClientManager;
 
@@ -70,10 +71,12 @@ public class Client {
     private ClientManager _wsClientManager = ClientManager.createClient();
     private AgentEndpoint _endpoint = new AgentEndpoint(this);
     private Session _currentSession;
+    private Environment _environment;
     private Processor _processor;
 
-    public Client(Processor processor)
+    public Client(Environment environment, Processor processor)
     {
+        _environment = environment;
         _processor = processor;
     }
 
@@ -114,7 +117,8 @@ public class Client {
 
     void _tryConnect() throws URISyntaxException, DeploymentException, IOException
     {
-        logger.info("Connecting to: {}.", System.getenv("BERLIOZ_AGENT_PATH"));
+        String agentUrl = _environment.get("BERLIOZ_AGENT_PATH");
+        logger.info("Connecting to: {}.", agentUrl);
 
         if (this._currentSession != null) {
             this._currentSession.close();
@@ -123,6 +127,6 @@ public class Client {
         this._currentSession = this._wsClientManager.connectToServer(
                 this._endpoint,
                 this._cec,
-                new URI(System.getenv("BERLIOZ_AGENT_PATH")));
+                new URI(agentUrl));
     }
 }
