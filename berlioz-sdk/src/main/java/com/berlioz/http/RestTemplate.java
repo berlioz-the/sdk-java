@@ -15,6 +15,7 @@ import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Map;
 
 public class RestTemplate extends org.springframework.web.client.RestTemplate {
@@ -82,6 +83,14 @@ public class RestTemplate extends org.springframework.web.client.RestTemplate {
     }
 
     private String massageUrl(String url) {
-        return "http://0.0.0.0/" + url;
+        try
+        {
+            new URL(url);
+            return url;
+        }
+        catch(Exception ex)
+        {
+            return "http://0.0.0.0/" + url;
+        }
     }
 }
