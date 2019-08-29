@@ -27,6 +27,7 @@
     <groupId>com.berlioz</groupId>
     <artifactId>sql</artifactId>
     <version>${env.BERLIOZ_SDK_VERSION}</version>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
